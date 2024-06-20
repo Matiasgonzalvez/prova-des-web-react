@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route, Routes} from 'react-router-dom'
+import Footer from './Components/Footer';
+import Header from './Components/Header';
+import Cadastro from './Pages/Cadastro';
+import Home from './Pages/Home';
+import Contato from './Pages/Contato';
+import Editar from './Pages/Editar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header>Cadastro de Livros</Header>
+      <Routes>
+      <Route path="/" element={<Home />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/contato" element={<Contato />} />
+        <Route path="/editar/:id" element={<Editar />} />
+      </Routes>
+      <Footer>Direitos Reservados - Julio Cezar Rutke</Footer>
     </div>
   );
 }
