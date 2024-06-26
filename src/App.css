@@ -11,20 +11,18 @@
 header {
     width: 100%;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
     align-items: center;
-    border-bottom: 2mm solid rgba(73, 73, 73, 0.6);
+    justify-content: space-around;
+    color: aliceblue;
+    background-color: #00001a;
 }
-.App a {
-    margin: 5%;
-}
-main {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+
+header a {
+    margin: 2rem;
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: 500;
+    font-size: large;
 }
 
 #tabela {
@@ -41,8 +39,8 @@ main {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: #28a745;
-    color: white;
+    background-color: #00001a;
+    color: aliceblue;
     border-radius: 5px 5px 0 0;
 }
 
@@ -57,78 +55,54 @@ main {
     flex-direction: column;
 }
 
-.livro {
+.transacoes {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
-.livro:last-child {
+.transacoes:last-child {
     border-bottom: none;
 }
 
-.livro div {
+.transacoes div {
     flex: 1;
     text-align: center;
 }
 
-.acoes a {
-    color: #28a745;
-    text-decoration: none;
-    margin: 0 5px;
-}
-
-.acoes a:hover {
-    text-decoration: underline;
-}
-
-.acoes {
-    cursor: pointer;
-}
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.form-header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-input {
+footer {
     width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    display: flex;
+    background-color: #00001a;
+    color: aliceblue;
+    justify-self: baseline;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: 3rem;
+}
+.home {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.resumo_transacoes {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: solid 1px #ccc;
+    margin: 2rem;
 }
 
-.form-button {
-    padding: 10px;
-    margin: 1%;
-    border-radius: 4px;
-    border: none;
+.resumo_transacoes_valores {
+    margin: 2rem;
+    font-size: 1.5rem;
+    border-bottom: solid 1px #ccc;
+    width: 80%;
+    font-weight: 500;
     color: black;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }

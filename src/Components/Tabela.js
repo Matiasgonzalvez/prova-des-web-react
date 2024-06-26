@@ -1,42 +1,30 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { TransacaoData } from "../Data/TransacaoData";
 
 const Tabela = () => {
-    const [livrosSalvos, setLivrosSalvos] = useState([]);
-
-    function removeLivro(index) {
-        let livros = JSON.parse(localStorage.getItem("livros") || "[]");
-        livros.splice(index, 1);
-        localStorage.setItem("livros", JSON.stringify(livros));
-        setLivrosSalvos(livros);
-    }
+    const [trasacoes, setTransacoes] = useState([]);
 
     useEffect(() => {
-        let livros = JSON.parse(localStorage.getItem("livros") || "[]");
-        console.log("Livros", livros);
-        setLivrosSalvos(livros);
+        setTransacoes(TransacaoData);
     }, []);
 
     return (
         <section id="tabela">
             <div id="header_tabela">
-                <div className="nome">Nome</div>
-                <div className="paginas">Páginas</div>
-                <div className="autor">Autor</div>
-                <div className="acoes">Ações</div>
+                <div>Código</div>
+                <div>Descrição</div>
+                <div>Entrada</div>
+                <div>Saída</div>
+                <div>Total</div>
             </div>
             <div id="body_tabela">
-                {livrosSalvos?.map((livro, index) => (
-                    <div className="livro" key={index}>
-                        <div className="nome">{livro.nome}</div>
-                        <div className="paginas">{livro.paginas}</div>
-                        <div className="autor">{livro.autor}</div>
-                        <div className="acoes">
-                            <Link to={"/editar/" + index}>Editar</Link>
-                        </div>
-                        <div className="acoes" onClick={() => removeLivro(index)}>
-                            <Link to="/">Remover</Link>
-                        </div>
+                {trasacoes?.map((transacao, index) => (
+                    <div className="transacoes" key={index}>
+                        <div>{transacao.codigo}</div>
+                        <div>{transacao.descricao}</div>
+                        <div>{transacao.entrada}</div>
+                        <div>{transacao.saida}</div>
+                        <div>{transacao.total}</div>
                     </div>
                 ))}
             </div>

@@ -1,8 +1,11 @@
-import Tabela from "../Components/Tabela";
+import ResumoTransasoes from "../Components/ResumoTransacoes";
 
 const Home = () => {
     return (
-        <Tabela/>
+        <div className="home">
+            <h2>Home</h2>
+            <ResumoTransasoes />
+        </div>
     )
 }
 
