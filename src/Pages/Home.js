@@ -1,6 +1,8 @@
+import Tabela from "../Components/Tabela";
+
 const Home = () => {
     return (
-        <div>Hello Home!</div>
+        <Tabela/>
     )
 }
 

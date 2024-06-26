@@ -1,46 +1,51 @@
-import { useEffect, useState } from "react"
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-const Formulario = (props) => {
-    
-    const [nome, setNome] = useState("")
-    const [paginas, setPaginas] = useState("")
-    const [autor, setAutor] = useState("")
+const Formulario = ({livrosSalvos, setLivrosSalvos}) => {
+    const [nome, setNome] = useState("");
+    const [paginas, setPaginas] = useState("");
+    const [autor, setAutor] = useState("");
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const novoLivro = {nome, paginas, autor};
+        const novosLivros = [...livrosSalvos, novoLivro];
 
-    function handleNome(event){
-        setNome(event.target.value)
-    }
-    
-    function handleAutor(event){
-        setAutor(event.target.value)
-    }
-    
-    function handlePaginas(event){
-        setPaginas(event.target.value)
-    }
+        localStorage.setItem("livros", JSON.stringify(novosLivros));
 
-    function handleSubmit(){
-        let livro = {
-            nome: nome,
-            paginas: paginas,
-            autor: autor
-        }
+        setLivrosSalvos(novosLivros);
 
-        props.setLivrosSalvos([...props.livrosSalvos, livro])
+        setNome("");
+        setPaginas("");
+        setAutor("");
+        navigate('/')
+    };
 
-        localStorage.setItem("livros", JSON.stringify(props.livrosSalvos))
-    }
-
-    return(
-        <section id="campos">
-                    <form id="formulario"> 
-                        <input onChange={handleNome} class="campos" type="text" name="nome" placeholder="Nome do Livro" /> 
-                        <input onChange={handlePaginas} class="campos" type="text" name="paginas" placeholder="Páginas do Livro" /> 
-                        <input onChange={handleAutor} class="campos" type="text" name="autor" placeholder="Autor do Livro" />
-                        <p id="mensagem_form"></p> 
-                        <a onClick={handleSubmit} id="botao_gravar">Salvar</a>
-                    </form>
-                </section>
-    )
-}
+    return (
+        <div className="form-container">
+            <form onSubmit={handleSubmit} >
+                <div className="form-header">Adicionar Novo Livro</div>
+                <div className="form-group">
+                    <label className="form-label">Nome:</label>
+                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="form-input"
+                           required/>
+                </div>
+                <div className="form-group">
+                    <label className="form-label">Páginas:</label>
+                    <input type="number" value={paginas} onChange={(e) => setPaginas(e.target.value)}
+                           className="form-input" required/>
+                </div>
+                <div className="form-group">
+                    <label className="form-label">Autor:</label>
+                    <input type="text" value={autor} onChange={(e) => setAutor(e.target.value)} className="form-input"
+                           required/>
+                </div>
+                <button type="submit" className="form-button" style={{background: "#00994d"}}>Salvar</button>
+                <button onClick={() => navigate('/')} className="form-button" style={{background: "#d9d9d9"}}>Cancelar
+                </button>
+            </form>
+        </div>
+    );
+};
 
 export default Formulario;

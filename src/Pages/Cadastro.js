@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 import Formulario from "../Components/Formulario";
-import Tabela from "../Components/Tabela";
 
 const Cadastro = () => {
     const [livrosSalvos, setLivrosSalvos] = useState([])
@@ -14,7 +13,6 @@ const Cadastro = () => {
     return( 
             <main>
                 <Formulario livrosSalvos={livrosSalvos} setLivrosSalvos={setLivrosSalvos} />
-                <Tabela livrosSalvos={livrosSalvos} />
             </main>
     )
 }

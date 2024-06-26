@@ -1,55 +1,74 @@
-import { useEffect, useLayoutEffect, useState } from "react"
-
-import { useNavigate, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 
 const Editar = () => {
-    const [livrosSalvos, setLivrosSalvos] = useState([])
+    const [livrosSalvos, setLivrosSalvos] = useState([]);
+    const [livro, setLivro] = useState({
+        nome: "",
+        paginas: "",
+        autor: ""
+    });
 
-    const [nome, setNome] = useState("Julio Cezar")
+    const {id} = useParams();
+    const navigate = useNavigate();
 
-    const { id } = useParams()
+    useEffect(() => {
+        const livros = JSON.parse(localStorage.getItem("livros") || "[]");
+        setLivrosSalvos(livros);
 
-    const navigate = useNavigate()
+        const index = parseInt(id);
+        if (index >= 0 && index < livros.length) {
+            const livroEncontrado = livros[index];
+            setLivro(livroEncontrado);
+        } else {
+        }
+    }, [id]);
 
-    function handleNome(event){
-        setNome(event.target.value)
+    function handleChange(event) {
+        const {name, value} = event.target;
+        setLivro(prevLivro => ({
+            ...prevLivro,
+            [name]: value
+        }));
     }
 
-    useLayoutEffect(() => {
-        console.log("Antes de montar o nome "+nome)
-    }, [])
-
-    useEffect(() => {
-        console.log("Montou o nome "+nome)
-    }, [])
-
-    useEffect(() => {
-        console.log("Atualizou o Nome para "+nome)
-    }, [nome])
-
-    useEffect(() => {
-        console.log("Matou o Nome para "+nome)
-        return;
-    }, [])
-
-
-
-    function handleSubmit(){
-        navigate('/cadastro')
+    function handleSubmit() {
+        const index = parseInt(id);
+        const livrosAtualizados = [...livrosSalvos];
+        if (index >= 0 && index < livrosSalvos.length) {
+            livrosAtualizados[index] = livro;
+        }
+        localStorage.setItem("livros", JSON.stringify(livrosAtualizados));
+        navigate("/")
     }
 
-    return( <main>
-                <section id="campos">
-                    <form id="formulario"> 
-                        <input onChange={handleNome} class="campos" type="text" name="nome" placeholder="Nome do Livro" /> 
-                        <input class="campos" type="text" name="paginas" placeholder="Páginas do Livro" /> 
-                        <input class="campos" type="text" name="autor" placeholder="Autor do Livro" />
-                        <p id="mensagem_form"></p> 
-                        <a onClick={handleSubmit} id="botao_gravar">Salvar</a>
-                    </form>
-                </section>
-                </main>
-    )
+    return (
+        <main>
+            <div className="form-container">
+                <form>
+                    <div className="form-header">Editar Livro</div>
+                    <div className="form-group">
+                        <label className="form-label">Nome:</label>
+                        <input onChange={handleChange} value={livro.nome} className="form-input" type="text" name="nome"
+                               placeholder="Nome do Livro"/>
+                    </div>
+                    <div className="form-group">
+                        <label className="form-label">Páginas:</label>
+                        <input onChange={handleChange} value={livro.paginas} className="form-input" type="text"
+                               name="paginas" placeholder="Páginas do Livro"/>
+                    </div>
+                    <div className="form-group">
+                        <label className="form-label">Autor:</label>
+                        <input onChange={handleChange} value={livro.autor} className="form-input" type="text"
+                               name="autor" placeholder="Autor do Livro"/>
+                    </div>
+                    <button onClick={handleSubmit} className="form-button" style={{background: "#00994d"}}>Salvar</button>
+                    <button onClick={() => navigate('/')} style={{background: "#d9d9d9"}}
+                       className="form-button">Cancelar</button>
+                </form>
+            </div>
+        </main>
+    );
 }
 
 export default Editar;

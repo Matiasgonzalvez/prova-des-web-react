@@ -11,13 +11,13 @@ function App() {
   return (
     <div className="App">
       <Header>Cadastro de Livros</Header>
-      <Routes>
-      <Route path="/" element={<Home />} />
+      <Routes >
+        <Route path="/" element={<Home />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/editar/:id" element={<Editar />} />
       </Routes>
-      <Footer>Direitos Reservados - Julio Cezar Rutke</Footer>
+      <Footer>Todos os direitos reservados - Matias Gonzalvez</Footer>
     </div>
   );
 }
